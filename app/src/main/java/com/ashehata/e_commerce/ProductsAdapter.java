@@ -3,11 +3,13 @@ package com.ashehata.e_commerce;
 
 //2
 
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +44,18 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
         holder.title.setText(product.getTitle());
         holder.price.setText(product.getPrice() + "");
         Glide.with(holder.image.getContext()).load(product.getImage()).into(holder.image);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage(product.getTitle())
+                        .setTitle(product.getDescription());
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
     }
 
     @Override
@@ -61,7 +75,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             title = itemView.findViewById(R.id.tv_title);
             price = itemView.findViewById(R.id.tv_price);
             image = itemView.findViewById(R.id.image);
+
         }
+
+        
+        /*
+AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+builder.setMessage(R.string.dialog_message)
+       .setTitle(R.string.dialog_title);
+AlertDialog dialog = builder.create();
+         */
 
     }
 }
